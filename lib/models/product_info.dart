@@ -15,6 +15,7 @@ class ProductInfo {
     required String publisherId,
     required double rate,
     required String title,
+    required String brandId,
   }) {
     _categoryId = categoryId;
     _coverImageURL = coverImageURL;
@@ -28,6 +29,7 @@ class ProductInfo {
     _publisherId = publisherId;
     _rate = rate;
     _title = title;
+    _brandId = brandId;
   }
 
   //Now we need to create a constructor for the firebase
@@ -44,6 +46,7 @@ class ProductInfo {
     _publisherId = data["publisher_id"];
     _rate = data["rate"];
     _title = data["title"];
+    _brandId = data["brand_id"];
   }
 
   late String _categoryId;
@@ -58,6 +61,7 @@ class ProductInfo {
   late String _publisherId;
   late double _rate;
   late String _title;
+  late String _brandId;
 
   //Now lets create a toMap function so we can convert the product to json format easily
   Map<String, dynamic> toMap() {
@@ -73,6 +77,7 @@ class ProductInfo {
       "publisher_id": publisherId,
       "rate": rate,
       "title": title,
+      "brand_id": brandId,
     };
   }
 
@@ -113,6 +118,9 @@ class ProductInfo {
   //the title of the product
   String get title => _title;
 
+  //this field is added to represent the product's subcategory or brand
+  String get brandId => _brandId;
+
   @override
   String toString() {
     String images = "[\n";
@@ -133,6 +141,7 @@ class ProductInfo {
         publisherId: $publisherId,
         rate: $rate,
         title: $title,
+        brandId: $brandId,
       );
     ''';
   }
