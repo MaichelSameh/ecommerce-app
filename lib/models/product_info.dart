@@ -16,6 +16,7 @@ class ProductInfo {
     required double rate,
     required String title,
     required String brandId,
+    required bool isFavorite,
   }) {
     _categoryId = categoryId;
     _coverImageURL = coverImageURL;
@@ -30,10 +31,12 @@ class ProductInfo {
     _rate = rate;
     _title = title;
     _brandId = brandId;
+    _isFavorite = isFavorite;
   }
 
   //Now we need to create a constructor for the firebase
-  ProductInfo.fromFirebase(Map<String, dynamic> data, String id) {
+  ProductInfo.fromFirebase(
+      Map<String, dynamic> data, String id, bool isFavorite) {
     _categoryId = data["category_id"];
     _coverImageURL = data["cover_image"];
     _createdAt = DateTime.parse(data["created_at"]);
@@ -47,6 +50,7 @@ class ProductInfo {
     _rate = data["rate"];
     _title = data["title"];
     _brandId = data["brand_id"];
+    _isFavorite = isFavorite;
   }
 
   late String _categoryId;
@@ -62,6 +66,7 @@ class ProductInfo {
   late double _rate;
   late String _title;
   late String _brandId;
+  late bool _isFavorite;
 
   //Now lets create a toMap function so we can convert the product to json format easily
   Map<String, dynamic> toMap() {
@@ -121,6 +126,9 @@ class ProductInfo {
   //this field is added to represent the product's subcategory or brand
   String get brandId => _brandId;
 
+  //this field declare wether this item is liked by the current user or not
+  bool get isFavorite => _isFavorite;
+
   @override
   String toString() {
     String images = "[\n";
@@ -142,6 +150,7 @@ class ProductInfo {
         rate: $rate,
         title: $title,
         brandId: $brandId,
+        isFavorite: $isFavorite,
       );
     ''';
   }
